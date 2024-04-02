@@ -20,7 +20,7 @@ from omni.isaac.core.utils.extensions import get_extension_path_from_name
 
 # derived from omni.isaac.franka
 
-class Mincobo(Robot):
+class Minicobo(Robot):
     """[summary]
 
     Args:
@@ -34,6 +34,7 @@ class Mincobo(Robot):
         gripper_open_position (Optional[np.ndarray], optional): [description]. Defaults to None.
         gripper_closed_position (Optional[np.ndarray], optional): [description]. Defaults to None.
     """
+    earlyexit = True
 
     def __init__(
         self,
@@ -48,6 +49,9 @@ class Mincobo(Robot):
         gripper_closed_position: Optional[np.ndarray] = None,
         deltas: Optional[np.ndarray] = None,
     ) -> None:
+        if self.earlyexit:
+            return
+
         prim = get_prim_at_path(prim_path)
         self._end_effector = None
         self._gripper = None
